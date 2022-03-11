@@ -1,0 +1,108 @@
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter(input.value)" #input />
+  <button
+    mat-button
+    *ngIf="input.value"
+    matSuffix
+    mat-icon-button
+    (click)="input.value = ''; applyFilter('')"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<table
+  class="table table-striped table-responsive-md btn-table"
+  mat-table
+  matSort
+  [dataSource]="dataSource"
+  [ngClass]="{ 'display-none': searchResult?.status !== SearchResultStatus.Ok }"
+>
+  <ng-container matColumnDef="#">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+    <td mat-cell *matCellDef="let element" [title]="element.id">
+      {{ element.id }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="item--title">
+      Title
+    </th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [title]="element.title"
+      class="item--title"
+    >
+      {{ element.title }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [title]="element.description"
+      class="item--description"
+    >
+      {{ element.description }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="item--price">
+      Price
+    </th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [title]="element.price"
+      class="item--price"
+    >
+      {{ element.price | currency: "EUR" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [title]="element.email"
+      class="item--email"
+    >
+      {{ element.email }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="toggleFavorite(element)">
+        <mat-icon color="primary">{{
+          !!element.isFavorite ? "favorite" : "favorite_border"
+        }}</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  [ngClass]="{ 'display-none': !dataSource.data.length }"
+></mat-paginator>
+
+<div
+  class="no-results"
+  *ngIf="searchResult?.status === SearchResultStatus.EmptyByFilter"
+>
+  <img src="assets/not-found.png" loading="lazy" />
+  <p>There is no results!</p>
+</div>

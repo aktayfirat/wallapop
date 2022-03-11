@@ -1,0 +1,52 @@
+<mat-dialog-actions>
+  <button mat-button mat-stroked-button mat-dialog-close class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-dialog-actions>
+
+<h2 mat-dialog-title>{{ searchResult.totalItemsCount }} Favorites</h2>
+
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter(input.value)" #input />
+  <button
+    mat-button
+    *ngIf="input.value"
+    matSuffix
+    mat-icon-button
+    (click)="input.value = ''; applyFilter('')"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-dialog-content>
+  <div
+    class="favorite-list"
+    *ngIf="searchResult.status === SearchResultStatus.Ok; else noResults"
+  >
+    <mat-card *ngFor="let favorite of searchResult.filteredItems">
+      <mat-card-header>
+        <mat-card-title>{{ favorite.title }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="favorite.image" />
+      <mat-card-actions>
+        <button mat-icon-button (click)="remove(favorite)">
+          <mat-icon color="primary">favorite</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #noResults>
+    <div class="no-favorites">
+      <p>
+        {{
+          searchResult.status === SearchResultStatus.EmptyDataSource
+            ? "No favorites!"
+            : "No results matching this filter!"
+        }}
+      </p>
+    </div>
+  </ng-template>
+</mat-dialog-content>

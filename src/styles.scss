@@ -1,0 +1,96 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$wallapop-palette: (
+  50: #e3f8f5,
+  100: #b2e6e0,
+  200: #82d6cc,
+  300: #53d1c2,
+  400: #2fc5b4,
+  500: #0eb9a5,
+  600: #0cb9a2,
+  700: #0eb39b,
+  800: #0bab92,
+  900: #049777,
+  A100: #cafff4,
+  A200: #97ffe9,
+  A400: #64ffdf,
+  A700: #4affda,
+  contrast: (
+    50: #000000,
+    100: #2f3130,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$app-primary-plette : mat-palette($wallapop-palette);
+$app-accent-plette : mat-palette($mat-pink, A200, A100, A400);
+$app-warn-plette: mat-palette($mat-red);
+
+$app-light-theme: mat-light-theme(
+  (
+    color: (
+      primary: $app-primary-plette ,
+      accent: $app-accent-plette,
+      warn: $app-warn-plette,
+    ),
+  )
+);
+
+@include angular-material-theme($app-light-theme);
+
+$custom-typography: mat-typography-config(
+  $font-family: "Times New Roman",
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500),
+);
+
+@include mat-toolbar-typography($custom-typography);
+@include mat-base-typography($custom-typography);
+@include angular-material-typography($custom-typography);
+@include mat-core($custom-typography);
+@include mat-slide-toggle-typography($custom-typography);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.highlighted-text {
+  color: white;
+  background-color: #069e82;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #cafff4;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #cafff4;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1fc0ad;
+}
+
+mat-form-field {
+  width: 100%;
+}

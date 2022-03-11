@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <img src="assets/wallapop-logo.png" />
+  <span class="app-bar--title">WALLAPOP - Item Manager</span>
+
+  <button mat-icon-button *ngIf="favoritesCount > 0" (click)="openDialog()">
+    <mat-icon
+      [matBadge]="favoritesCount"
+      [matBadgeHidden]="!favoritesCount"
+      matBadgeColor="accent"
+      matBadgeOverlap="false"
+      >favorite</mat-icon
+    >
+  </button>
+</mat-toolbar>
+
+<app-item-list></app-item-list>

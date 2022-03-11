@@ -1,0 +1,70 @@
+:host {
+  box-sizing: border-box;
+  padding: 20px;
+  width: 90%;
+  height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  .no-results {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+
+    img {
+      width: fit-content;
+    }
+
+    p {
+      margin-top: 50px;
+      font-size: 48px;
+      color: #82d6cc;
+    }
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .mat-row:hover .mat-cell {
+    color: #36cab8;
+    border-bottom: 1px solid #13c1ac;
+    border-top: 1px solid #13c1ac;
+    cursor: default;
+  }
+
+  .mat-column-name {
+    border-left: 1px solid grey;
+  }
+}
+
+.item--title {
+  width: 200px;
+  padding-right: 15px;
+}
+
+.item--price {
+  width: 65px;
+  padding: 0 15px;
+}
+
+.display-none {
+  display: none;
+}
+
+::ng-deep.mat-paginator .mat-paginator-container {
+  color: #049777;
+}
+
+@media screen and (max-width: 950px) {
+  .item--description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40px;
+  }
+}
+
+

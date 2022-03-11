@@ -1,0 +1,49 @@
+:host {
+  h2 {
+    color: #11bba5;
+  }
+
+  mat-dialog-actions {
+    float: right;
+    display: block;
+  }
+
+  .close-button {
+    background-color: #13a591;
+    color: #fafafa;
+  }
+
+  mat-dialog-content {
+    background-color: #fafafa;
+    width: 920px;
+    height: 600px;
+
+    .favorite-list {
+      display: flex;
+      flex-wrap: wrap;
+      
+      mat-card {
+        width: 250px;
+        margin: 5px;
+
+        mat-card-title {
+          color: #13c1ac;
+        }
+      }
+    }
+
+    .no-favorites {
+      line-height: 500px;
+      font-size: 48px;
+      color: #848484;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  mat-card {
+    width: calc(80% - 100px) !important;
+  }
+}
